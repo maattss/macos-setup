@@ -1,6 +1,6 @@
-# Mac setup 🛠
+# MacOS setup 🛠
 
-Repo containing a list of my macOS apps and settings as well as a script for installing all apps on new computers.
+Repo containing a list of all my most used macOS apps and settings.
 
 ## Apps/tools
 
@@ -15,6 +15,7 @@ Repo containing a list of my macOS apps and settings as well as a script for ins
 | Sublime Text       | sublime-text       | Text editor                | https://www.sublimetext.com/           |
 | Nvm                | nvm                | Node.js version manager    | https://github.com/nvm-sh/nvm          |
 | Node.js            | node               | JavaScript runtime         | https://nodejs.org/en/                 |
+| .NET               | dotnet             | .NET runtime               | https://dotnet.microsoft.com/en-us/    |
 | Magnet             | N/A                | Window manager             | https://magnet.crowdcafe.com/          |
 | AltTab             | alt-tab            | Windows alt-tab on macOS   | https://alt-tab-macos.netlify.app/     |
 | Postman            | postman            | API platform               | https://www.postman.com/               |
@@ -22,6 +23,7 @@ Repo containing a list of my macOS apps and settings as well as a script for ins
 | Slack              | slack              | Communication platform     | https://slack.com/                     |
 | Spotify            | spotify            | Music player               | https://www.spotify.com/               |
 | Iina               | iina               | Media player               | https://iina.io/                       |
+| 1Password          | 1password          | Password manager           | https://1password.com/                 |
 
 ## Settings
 
@@ -32,11 +34,11 @@ Repo containing a list of my macOS apps and settings as well as a script for ins
   "editor.minimap.enabled": false,
   "editor.formatOnSave": true,
   "editor.inlineSuggest.enabled": true,
+  "editor.snippetSuggestions": "top",
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.sortImports": true
   },
-
   "files.autoSave": "onFocusChange",
   "workbench.colorTheme": "Andromeda",
   "workbench.iconTheme": "material-icon-theme",
@@ -59,7 +61,7 @@ Repo containing a list of my macOS apps and settings as well as a script for ins
 }
 ```
 
-### VS Code Extension
+## VS Code extensions
 
 ```json
 {
@@ -77,4 +79,10 @@ Repo containing a list of my macOS apps and settings as well as a script for ins
 
 ### Rider settings
 
-### iTerm2 settings
+### iTerm2 setting
+
+## Chrome extensions
+
+- [AdBlock](https://chrome.google.com/webstore/detail/adblock-%E2%80%94-best-ad-blocker/gighmmpiobklfepjocnamgkkbiglidom)
+- [1Password](https://chrome.google.com/webstore/detail/1password-%E2%80%93-password-mana/aeblfdkhhhdcdjpifhhbdiojplfjncoa)
+- [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
