@@ -8,12 +8,22 @@
 # include:
 #
 # - Magnet (Mac App store)
+# - Vectornator (Mac App Store)
 # - Logi Options
+
+# Check for Xcode build tools, install if we don't have it
+if type xcode-select >&- && xpath=$( xcode-select --print-path ) && test -d "${xpath}" && test -x "${xpath}" ; then
+  #... is correctly installed
+  echo "Xcode build tools already installed... skipping";
+else
+  echo "Installing Xcode build tools...";
+  xcode-select --install 
+fi
 
 # Check for Homebrew, install if we don't have it
 if test ! $(which brew); then
-    echo "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  echo "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
  else
   echo "Homebrew already installed... Skipping..."
 fi
@@ -53,8 +63,11 @@ brew cleanup
 if [ -d ~/.oh-my-zsh ]; then
 	echo "Oh My Zsh already installed... Skipping..."
  else
-    echo "Installing Oh My Zsh..."
-    /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  echo "Installing Oh My Zsh..."
+  /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
+
+# Create "Developer" folder
+mkdir ~/Developer
 
 echo "Finished!"

@@ -31,6 +31,9 @@ Repo containing a list of all my most used macOS apps and settings.
 
 ```json
 {
+  "search.exclude": {
+    "**/node_modules": true
+  },
   "editor.minimap.enabled": false,
   "editor.formatOnSave": true,
   "editor.inlineSuggest.enabled": true,
@@ -43,6 +46,10 @@ Repo containing a list of all my most used macOS apps and settings.
   "workbench.colorTheme": "Andromeda",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.productIconTheme": "fluent-icons",
+  "settingsSync.ignoredExtensions": ["zixuanchen.vitest-explorer"],
+  "prettier.endOfLine": "auto",
+  "eslint.enable": true,
+  "eslint.validate": ["vue", "react", "typescript", "html", "javascript"],
   "javascript.preferences.quoteStyle": "double",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.suggest.autoImports": true,
@@ -53,33 +60,56 @@ Repo containing a list of all my most used macOS apps and settings.
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "prettier.endOfLine": "auto",
-  "settingsSync.ignoredExtensions": ["zixuanchen.vitest-explorer"]
-}
-```
-
-## VS Code extensions
-
-```json
-{
-  "recommendations": [
-    "eliverlara.andromeda",
-    "formulahendry.auto-rename-tag",
-    "miguelsolorio.fluent-icons",
-    "pkief.material-icon-theme",
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-    "k--kato.intellij-idea-keybindings"
-  ]
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
 ```
 
 ### Rider settings
 
 ### iTerm2 setting
+
+### Finder settings
+
+- Finder -> Preferences
+  - General -> Show these on the desktop -> Select None
+  - General -> New Finder windows show -> Home Folder
+  - Advanced -> Show all filename extensions -> Yes
+  - Advanced -> Show warning before changing an extension -> No
+  - Advanced -> When performing a search -> Search the current folder
+- View
+  - Show Status Bar
+  - Show Path Bar
+  - Show Tab Bar
+
+### Docks settings
+
+Make the dock as small as possible and auto hide it.
+
+- System Preferences
+  - Dock & Menu Bar
+    - Size -> Small as possible
+    - Position on screen -> Right
+    - Automatically hide and show the Dock -> Yes
 
 ## Chrome extensions
 
