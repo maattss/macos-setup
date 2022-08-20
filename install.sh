@@ -54,6 +54,7 @@ brew install --cask alt-tab
 brew install --cask spotify
 brew install --cask iina
 brew install --cask 1password
+brew install --cask cheatsheet
 
 # Homebrew Cleanup
 echo "Cleanup..."
