@@ -89,11 +89,16 @@ Repo containing a list of all my most used macOS apps and settings.
 
 ### Rider settings
 
-TODO: Insert
+- Theme: Material Theme UI
 
 ### iTerm2 setting
-
-TODO: Insert
+* Appearance
+  * Theme
+    * Minimal
+* Profiles
+  * Default
+      * General -> Working Directory -> Reuse previous session's directory
+      * Keys -> Key Mappings -> Presets -> Natural Text Editing
 
 ### Logi options setting
 
