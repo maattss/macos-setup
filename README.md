@@ -52,7 +52,7 @@ Repo containing a list of all my most used macOS apps and settings.
   "settingsSync.ignoredExtensions": ["zixuanchen.vitest-explorer"],
   "prettier.endOfLine": "auto",
   "eslint.enable": true,
-  "eslint.validate": ["vue", "react", "typescript", "html", "javascript"],
+  "eslint.validate": ["react", "typescript", "html", "javascript"],
   "javascript.preferences.quoteStyle": "double",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.suggest.autoImports": true,
@@ -84,6 +84,26 @@ Repo containing a list of all my most used macOS apps and settings.
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
+}
+```
+
+### VS Extensions
+
+```json
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint", // ES Lint
+    "esbenp.prettier-vscode", // Prettier
+    "zixuanchen.vitest-explorer", // Vitest explorer
+    "formulahendry.auto-rename-tag", // Auto rename tag
+    "github.github-vscode-theme", // Github theme
+    "eliverlara.andromeda", // Andromeda theme
+    "equinusocio.vsc-material-theme", // Material theme
+    "akamud.vscode-theme-onedark", // Atom One Dark theme
+    "miguelsolorio.fluent-icons", // Product icon theme
+    "pkief.material-icon-theme", // Icon theme
+    "yzhang.markdown-all-in-one" // Markdown extension
+  ]
 }
 ```
 
