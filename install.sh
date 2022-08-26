@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Homebrew script for installing packages and applications on macOS.
+# Homebrew script for installing macOS packages and applications.
 #
 # Some apps don't have a cask and so still need to be installed by hand:
 # - Magnet (Mac App store)
@@ -66,6 +66,8 @@ brew_install spotify --cask
 brew_install iina --cask
 brew_install 1password --cask
 brew_install cheatsheet --cask
+# brew_install beamer --cask
+# brew_install windscribe --cask
 
 echo "########## Finishing up ########## "
 
