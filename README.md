@@ -23,11 +23,12 @@ Repo containing a list of all my most used macOS apps and settings.
 | 1Password          | 1password          | Password manager             | https://1password.com/                               |
 | CheatSheet         | cheatsheet         | List all available shortcuts | https://www.mediaatelier.com/CheatSheet/             |
 | AltTab             | alt-tab            | Windows alt-tab on macOS     | https://alt-tab-macos.netlify.app/                   |
+| Beamer             | beamer             | Stream video files           | https://beamer-app.com/                              |
+| Windscribe         | windscribe         | VPN                          | https://windscribe.com/                              |
 | Magnet             | N/A                | Window manager               | https://magnet.crowdcafe.com/                        |
 | Vectornator        | N/A                | Graphic design software      | https://www.vectornator.io/                          |
 | Logi Options       | N/A                | Logitech preferences tool    | https://www.logitech.com/no-no/software/options.html |
-| Beamer             | N/A                | Stream video files           | https://beamer-app.com/                              |
-| Windscribe         | N/A                | VPN                          | https://windscribe.com/                              |
+
 
 ## Settings
 
