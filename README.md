@@ -15,7 +15,6 @@ Repo containing a list of all my most used macOS apps and settings.
 | Nvm                | nvm                | Node.js version manager      | https://github.com/nvm-sh/nvm                        |
 | Node.js            | node               | JavaScript runtime           | https://nodejs.org/en/                               |
 | .NET               | dotnet             | .NET runtime                 | https://dotnet.microsoft.com/en-us/                  |
-| AltTab             | alt-tab            | Windows alt-tab on macOS     | https://alt-tab-macos.netlify.app/                   |
 | Postman            | postman            | API platform                 | https://www.postman.com/                             |
 | Google Chrome      | google-chrome      | Web browser                  | https://www.google.com/intl/no/chrome/               |
 | Slack              | slack              | Communication platform       | https://slack.com/                                   |
@@ -23,6 +22,7 @@ Repo containing a list of all my most used macOS apps and settings.
 | Iina               | iina               | Media player                 | https://iina.io/                                     |
 | 1Password          | 1password          | Password manager             | https://1password.com/                               |
 | CheatSheet         | cheatsheet         | List all available shortcuts | https://www.mediaatelier.com/CheatSheet/             |
+| AltTab             | alt-tab            | Windows alt-tab on macOS     | https://alt-tab-macos.netlify.app/                   |
 | Magnet             | N/A                | Window manager               | https://magnet.crowdcafe.com/                        |
 | Vectornator        | N/A                | Graphic design software      | https://www.vectornator.io/                          |
 | Logi Options       | N/A                | Logitech preferences tool    | https://www.logitech.com/no-no/software/options.html |
