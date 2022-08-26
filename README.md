@@ -12,7 +12,6 @@ Repo containing a list of all my most used macOS apps and settings.
 | Github desktop     | github             | Github desktop application   | https://desktop.github.com/                          |
 | Rider              | rider              | Cross-Platform .NET IDE      | https://www.jetbrains.com/rider/                     |
 | Visual Studio Code | visual-studio-code | Lightweight code editor      | https://code.visualstudio.com/                       |
-| Sublime Text       | sublime-text       | Text editor                  | https://www.sublimetext.com/                         |
 | Nvm                | nvm                | Node.js version manager      | https://github.com/nvm-sh/nvm                        |
 | Node.js            | node               | JavaScript runtime           | https://nodejs.org/en/                               |
 | .NET               | dotnet             | .NET runtime                 | https://dotnet.microsoft.com/en-us/                  |
@@ -112,13 +111,14 @@ Repo containing a list of all my most used macOS apps and settings.
 - Theme: Material Theme UI
 
 ### iTerm2 setting
-* Appearance
-  * Theme
-    * Minimal
-* Profiles
-  * Default
-      * General -> Working Directory -> Reuse previous session's directory
-      * Keys -> Key Mappings -> Presets -> Natural Text Editing
+
+- Appearance
+  - Theme
+    - Minimal
+- Profiles
+  - Default
+    - General -> Working Directory -> Reuse previous session's directory
+    - Keys -> Key Mappings -> Presets -> Natural Text Editing
 
 ### Logi options setting
 
