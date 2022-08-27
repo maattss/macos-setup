@@ -9,6 +9,7 @@ Repo containing a list of all my most used macOS apps and settings.
 | iTerm2             | iterm2             | Terminal                     | https://iterm2.com/                                  |
 | Oh My Zsh          | oh-my-zsh          | Zsh configuration manager    | https://ohmyz.sh/                                    |
 | Git                | git                | Version control              | https://git-scm.com/                                 |
+| Docker             | docker             | Containerize applications    | https://www.docker.com/                              |
 | Github desktop     | github             | Github desktop application   | https://desktop.github.com/                          |
 | Rider              | rider              | Cross-Platform .NET IDE      | https://www.jetbrains.com/rider/                     |
 | Visual Studio Code | visual-studio-code | Lightweight code editor      | https://code.visualstudio.com/                       |
@@ -28,7 +29,6 @@ Repo containing a list of all my most used macOS apps and settings.
 | Magnet             | N/A                | Window manager               | https://magnet.crowdcafe.com/                        |
 | Vectornator        | N/A                | Graphic design software      | https://www.vectornator.io/                          |
 | Logi Options       | N/A                | Logitech preferences tool    | https://www.logitech.com/no-no/software/options.html |
-
 
 ## Settings
 

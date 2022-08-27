@@ -52,6 +52,7 @@ brew_install() {
 brew_install git
 brew_install node
 brew_install nvm
+brew_install docker
 brew_install iterm2 --cask
 brew_install github --cask
 brew_install visual-studio-code --cask
