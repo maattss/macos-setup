@@ -30,9 +30,9 @@ Repo containing a list of all my most used macOS apps and settings.
 | Vectornator        | N/A                | Graphic design software      | https://www.vectornator.io/                          |
 | Logi Options       | N/A                | Logitech preferences tool    | https://www.logitech.com/no-no/software/options.html |
 
-## Settings
+## VS Code settings
 
-### VS Code
+Shell Command: Install 'code' command in PATH
 
 ```json
 {
@@ -89,7 +89,7 @@ Repo containing a list of all my most used macOS apps and settings.
 }
 ```
 
-### VS Extensions
+## VS Code Extensions
 
 ```json
 {
@@ -113,7 +113,7 @@ Repo containing a list of all my most used macOS apps and settings.
 
 - Theme: Material Theme UI
 
-### iTerm2 setting
+## iTerm2 setting
 
 - Appearance
   - Theme
@@ -123,11 +123,7 @@ Repo containing a list of all my most used macOS apps and settings.
     - General -> Working Directory -> Reuse previous session's directory
     - Keys -> Key Mappings -> Presets -> Natural Text Editing
 
-### Logi options setting
-
-TODO: Insert
-
-### Finder settings
+## Finder settings
 
 - Finder -> Preferences
   - General -> Show these on the desktop -> Select None
@@ -140,7 +136,7 @@ TODO: Insert
   - Show Path Bar
   - Show Tab Bar
 
-### System Preferences
+## System Preferences
 
 - General
   - Appearance --> Dark
