@@ -96,7 +96,6 @@ Shell Command: Install 'code' command in PATH
   "recommendations": [
     "dbaeumer.vscode-eslint", // ES Lint
     "esbenp.prettier-vscode", // Prettier
-    "zixuanchen.vitest-explorer", // Vitest explorer
     "formulahendry.auto-rename-tag", // Auto rename tag
     "github.github-vscode-theme", // Github theme
     "eliverlara.andromeda", // Andromeda theme
@@ -160,3 +159,4 @@ Shell Command: Install 'code' command in PATH
 - [AdBlock](https://chrome.google.com/webstore/detail/adblock-%E2%80%94-best-ad-blocker/gighmmpiobklfepjocnamgkkbiglidom)
 - [1Password](https://chrome.google.com/webstore/detail/1password-%E2%80%93-password-mana/aeblfdkhhhdcdjpifhhbdiojplfjncoa)
 - [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+- [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa)
