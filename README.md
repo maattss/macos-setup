@@ -11,6 +11,7 @@ Repo containing a list of all my most used macOS apps and settings.
 | Git                | git                | Version control              | https://git-scm.com/                                 |
 | Docker             | docker             | Containerize applications    | https://www.docker.com/                              |
 | Github desktop     | github             | Github desktop application   | https://desktop.github.com/                          |
+| Github CLI         | gh                 | Github CLI                   | https://cli.github.com/                              |
 | Rider              | rider              | Cross-Platform .NET IDE      | https://www.jetbrains.com/rider/                     |
 | Visual Studio Code | visual-studio-code | Lightweight code editor      | https://code.visualstudio.com/                       |
 | Nvm                | nvm                | Node.js version manager      | https://github.com/nvm-sh/nvm                        |
