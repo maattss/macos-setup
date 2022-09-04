@@ -33,14 +33,6 @@ brew update
 
 echo "########## Apps and tools ##########"
 
-# Check for Oh My Zsh, install if we don't have it
-if [ -d ~/.oh-my-zsh ]; then
-	echo "Oh My Zsh already installed... Skipping..."
- else
-  echo "Installing Oh My Zsh..."
-  /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
-
 brew_install() {
     if brew list $1 &>/dev/null; then
         echo "$1 already installed... Skipping"
@@ -52,7 +44,7 @@ brew_install() {
 brew_install git
 brew_install node
 brew_install nvm
-brew_install docker
+brew_install docker --cask
 brew_install iterm2 --cask
 brew_install github --cask
 brew_install visual-studio-code --cask
@@ -69,6 +61,14 @@ brew_install 1password --cask
 brew_install cheatsheet --cask
 # brew_install beamer --cask
 # brew_install windscribe --cask
+
+# Check for Oh My Zsh, install if we don't have it
+if [ -d ~/.oh-my-zsh ]; then
+	echo "Oh My Zsh already installed... Skipping..."
+ else
+  echo "Installing Oh My Zsh..."
+  /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 echo "########## Finishing up ########## "
 
