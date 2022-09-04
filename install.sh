@@ -42,6 +42,7 @@ brew_install() {
 }
 
 brew_install git
+brew_install gh
 brew_install node
 brew_install nvm
 brew_install docker --cask
