@@ -112,6 +112,7 @@ Shell Command: Install 'code' command in PATH
 ### Rider settings
 
 - Theme: Material Theme UI
+- Keymap: Visual Studio (macOS) 
 
 ## iTerm2 setting
 
