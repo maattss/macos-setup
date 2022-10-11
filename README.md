@@ -86,7 +86,8 @@ Shell Command: Install 'code' command in PATH
   },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }
 ```
 
