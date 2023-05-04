@@ -60,7 +60,7 @@ brew_install spotify --cask
 brew_install iina --cask
 brew_install 1password --cask
 brew_install cheatsheet --cask
-# brew_install beamer --cask
+brew_install raycast --cask
 # brew_install windscribe --cask
 
 # Check for Oh My Zsh, install if we don't have it
