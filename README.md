@@ -4,35 +4,7 @@ Repo containing a list of all my most used macOS apps and settings.
 
 ## Apps/tools
 
-| Name                     | Brew name          | Description                                | Link                                                                 |
-| -------------------------| ------------------ | ------------------------------------------ | -------------------------------------------------------------------- |
-| iTerm2                   | iterm2             | Terminal                                   | https://iterm2.com/                                                  |
-| Oh My Zsh                | oh-my-zsh          | Zsh configuration manager                  | https://ohmyz.sh/                                                    |
-| Git                      | git                | Version control                            | https://git-scm.com/                                                 |
-| Docker                   | docker             | Containerize applications                  | https://www.docker.com/                                              |
-| Github desktop           | github             | Github desktop application                 | https://desktop.github.com/                                          |
-| Github CLI               | gh                 | Github CLI                                 | https://cli.github.com/                                              |
-| Rider                    | rider              | Cross-Platform .NET IDE                    | https://www.jetbrains.com/rider/                                     |
-| Visual Studio Code       | visual-studio-code | Lightweight code editor                    | https://code.visualstudio.com/                                       |
-| Nvm                      | nvm                | Node.js version manager                    | https://github.com/nvm-sh/nvm                                        |
-| Node.js                  | node               | JavaScript runtime                         | https://nodejs.org/en/                                               |
-| .NET                     | dotnet             | .NET runtime                               | https://dotnet.microsoft.com/en-us/                                  |
-| Postman                  | postman            | API platform                               | https://www.postman.com/                                             |
-| Google Chrome            | google-chrome      | Web browser                                | https://www.google.com/intl/no/chrome/                               |
-| Slack                    | slack              | Communication platform                     | https://slack.com/                                                   |
-| Spotify                  | spotify            | Music player                               | https://www.spotify.com/                                             |
-| Iina                     | iina               | Media player                               | https://iina.io/                                                     |
-| 1Password                | 1password          | Password manager                           | https://1password.com/                                               |
-| CheatSheet               | cheatsheet         | List all available shortcuts               | https://www.mediaatelier.com/CheatSheet/                             |
-| AltTab                   | alt-tab            | Windows alt-tab on macOS                   | https://alt-tab-macos.netlify.app/                                   |
-| Windscribe               | windscribe         | VPN                                        | https://windscribe.com/                                              |
-| Raycast                  | raycast            | Extendable launcher                        | https://www.raycast.com/                                             |
-| Magnet                   | N/A                | Window manager                             | https://magnet.crowdcafe.com/                                        |
-| Vectornator              | N/A                | Graphic design software                    | https://www.vectornator.io/                                          |
-| MOS                      | N/A                | Smooth scrolling and set scroll direction  | https://mos.caldis.me/                                               |
-| Font Smoothing Adjuster  | N/A                | Re-enable the font smoothing controls      | https://www.fontsmoothingadjuster.com/                               |
-| Logi Options             | N/A                | Logitech preferences tool                  | https://www.logitech.com/no-no/software/options.html                 |
-| CopyClip                 | N/A                | Clipboard manager for Mac                  | https://apps.apple.com/no/app/copyclip-clipboard-history/id595191960 |
+> See `install.sh`
 
 ## VS Code settings
 
