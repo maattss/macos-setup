@@ -45,7 +45,7 @@ brew_install gh
 brew_install node
 brew_install nvm
 brew_install docker --cask
-brew_install iterm2 --cask
+brew install warp --cask
 brew_install github --cask
 brew_install visual-studio-code --cask
 brew_install rider --cask
