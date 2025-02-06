@@ -51,7 +51,7 @@ brew_install visual-studio-code --cask
 brew_install rider --cask
 brew_install dotnet-sdk --cask
 brew_install slack --cask
-brew_install arc --cask
+brew_install zen-browser --cask
 brew_install dropbox --cask
 brew_install alt-tab --cask
 brew_install spotify --cask
