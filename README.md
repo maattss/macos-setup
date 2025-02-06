@@ -87,18 +87,7 @@ Shell Command: Install 'code' command in PATH
 
 ### Rider settings
 
-- Theme: Material Theme UI
-- Keymap: Visual Studio (macOS) 
-
-## iTerm2 setting
-
-- Appearance
-  - Theme
-    - Minimal
-- Profiles
-  - Default
-    - General -> Working Directory -> Reuse previous session's directory
-    - Keys -> Key Mappings -> Presets -> Natural Text Editing
+- Keymap: VSCode (macOS) 
 
 ## Finder settings
 
@@ -131,10 +120,3 @@ Shell Command: Install 'code' command in PATH
   - Scroll direction -> Natural
 - Display
   - Resolution -> Scaled & More Space
-
-## Chrome extensions
-
-- [AdBlock](https://chrome.google.com/webstore/detail/adblock-%E2%80%94-best-ad-blocker/gighmmpiobklfepjocnamgkkbiglidom)
-- [1Password](https://chrome.google.com/webstore/detail/1password-%E2%80%93-password-mana/aeblfdkhhhdcdjpifhhbdiojplfjncoa)
-- [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
-- [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa)
