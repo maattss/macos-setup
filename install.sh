@@ -44,8 +44,9 @@ brew_install git
 brew_install gh
 brew_install node
 brew_install nvm
+brew_install bruno
 brew_install docker --cask
-brew install warp --cask
+brew_install warp --cask
 brew_install github --cask
 brew_install visual-studio-code --cask
 brew_install rider --cask
@@ -58,7 +59,7 @@ brew_install spotify --cask
 brew_install iina --cask
 brew_install raycast --cask
 brew_install font-smoothing-adjuster --cask
-brew_install mos --cask 
+
 # brew_install windscribe --cask
 
 # Check for Oh My Zsh, install if we don't have it
