@@ -48,6 +48,13 @@ info "Setting appearance to Dark mode..."
 osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to true'
 success "Dark mode enabled"
 
+# Disable Siri
+info "Disabling Siri..."
+defaults write com.apple.assistant.support "Assistant Enabled" -bool false
+defaults write com.apple.Siri StatusMenuVisible -bool false
+defaults write com.apple.Siri UserHasDeclinedEnable -bool true
+success "Siri disabled"
+
 # Disable the sound effects on boot
 info "Disabling boot sound..."
 sudo nvram SystemAudioVolume=" "
@@ -76,6 +83,9 @@ defaults write com.apple.dock launchanim -bool false
 
 # Speed up Mission Control animations
 defaults write com.apple.dock expose-animation-duration -float 0.1
+
+# Disable Stage Manager (keep traditional desktop workflow)
+defaults write com.apple.WindowManager GloballyEnabled -bool false
 
 success "Dock configured"
 

@@ -7,7 +7,7 @@
 #
 # Manual installs required:
 # - Magnet (Mac App Store)
-# - Logi Options (Logitech website)
+# - Logi Options+ (Logitech website)
 ###############################################################################
 
 set -e  # Exit on error
@@ -121,20 +121,28 @@ brew_install() {
 brew_install git
 brew_install gh
 brew_install node
-brew_install nvm
+brew_install mise
 brew_install pnpm
 brew_install jq
 brew_install tree
 brew_install wget
 brew_install httpie
+brew_install bat
+brew_install eza
+brew_install ripgrep
+brew_install fd
+brew_install fzf
+brew_install zoxide
+brew_install lazygit
 
 section "Development Applications"
 
 # Development tools
-brew_install docker --cask
+brew_install orbstack --cask
 brew_install warp --cask
 brew_install github --cask
 brew_install visual-studio-code --cask
+brew_install cursor --cask
 brew_install rider --cask
 brew_install dotnet-sdk --cask
 brew_install bruno --cask
@@ -145,7 +153,6 @@ section "Productivity Applications"
 brew_install slack --cask
 brew_install raycast --cask
 brew_install alt-tab --cask
-brew_install dropbox --cask
 
 section "Media & Browsers"
 
@@ -155,9 +162,6 @@ brew_install spotify --cask
 brew_install iina --cask
 
 section "Utilities"
-
-# Utilities
-brew_install font-smoothing-adjuster --cask
 
 # Uncomment to install VPN
 # brew_install windscribe --cask
@@ -192,6 +196,24 @@ else
     success "zsh-syntax-highlighting already installed"
 fi
 
+section "GitHub Copilot CLI"
+
+# Install GitHub Copilot CLI extension
+if command -v gh &> /dev/null; then
+    if gh extension list 2>/dev/null | grep -q "gh-copilot"; then
+        success "GitHub Copilot CLI already installed"
+    else
+        info "Installing GitHub Copilot CLI..."
+        if gh extension install github/gh-copilot 2>/dev/null; then
+            success "GitHub Copilot CLI installed"
+        else
+            warning "Failed to install GitHub Copilot CLI (requires GitHub authentication)"
+        fi
+    fi
+else
+    warning "GitHub CLI (gh) not found. Skipping GitHub Copilot CLI installation."
+fi
+
 section "Directory Setup"
 
 # Create Developer folder if it doesn't exist
@@ -216,9 +238,13 @@ echo "Next steps:"
 echo "  1. Run 'source ~/.zshrc' or restart your terminal"
 echo "  2. Configure Git: ./scripts/git-setup.sh"
 echo "  3. Apply macOS settings: ./scripts/macos-settings.sh"
-echo "  4. Install VS Code extensions manually or sync settings"
-echo "  5. Install manual apps: Magnet (App Store), Logi Options"
+echo "  4. Install VS Code / Cursor extensions manually or sync settings"
+echo "  5. Install manual apps: Magnet (App Store), Logi Options+"
 echo ""
 echo "Add these plugins to your ~/.zshrc:"
 echo "  plugins=(git zsh-autosuggestions zsh-syntax-highlighting)"
+echo ""
+echo "Add mise and zoxide shell integration to your ~/.zshrc:"
+echo '  eval "$(mise activate zsh)"'
+echo '  eval "$(zoxide init zsh)"'
 echo ""

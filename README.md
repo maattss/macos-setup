@@ -41,23 +41,31 @@ macos-setup/
 | `git` | Version control |
 | `gh` | GitHub CLI |
 | `node` | Node.js runtime |
-| `nvm` | Node Version Manager |
+| `mise` | Polyglot version manager (Node, Python, Ruby, …) |
 | `pnpm` | Fast package manager |
 | `jq` | JSON processor |
 | `tree` | Directory listing |
 | `wget` | File downloader |
 | `httpie` | HTTP client |
+| `bat` | `cat` with syntax highlighting |
+| `eza` | Modern `ls` replacement |
+| `ripgrep` | Fast `grep` replacement |
+| `fd` | Fast `find` replacement |
+| `fzf` | Fuzzy finder |
+| `zoxide` | Smarter `cd` |
+| `lazygit` | Terminal UI for Git |
 
 ### Development Applications
 | App | Description |
 |-----|-------------|
-| Docker | Containerization |
-| Warp | Modern terminal |
+| OrbStack | Fast, lightweight Docker & Linux VMs |
+| Warp | Modern AI-powered terminal |
 | GitHub Desktop | Git GUI |
 | VS Code | Code editor |
+| Cursor | AI-first code editor |
 | Rider | .NET IDE |
 | .NET SDK | .NET development |
-| Bruno | API client |
+| Bruno | Open-source API client |
 
 ### Productivity
 | App | Description |
@@ -65,7 +73,6 @@ macos-setup/
 | Slack | Team communication |
 | Raycast | Productivity launcher |
 | Alt-Tab | Window switcher |
-| Dropbox | Cloud storage |
 
 ### Media & Browsers
 | App | Description |
@@ -79,15 +86,18 @@ macos-setup/
 - **zsh-autosuggestions** - Command suggestions
 - **zsh-syntax-highlighting** - Syntax highlighting
 
+### AI Tools
+- **GitHub Copilot CLI** (`gh copilot`) - AI suggestions in the terminal
+
 ## 🔧 Manual Installations Required
 
 These apps need to be installed manually:
 - **Magnet** - Window manager (Mac App Store)
-- **Logi Options** - Logitech mouse/keyboard settings
+- **Logi Options+** - Logitech mouse/keyboard settings
 
-## ⚙️ VS Code Settings
+## ⚙️ VS Code / Cursor Settings
 
-After installation, install the 'code' command in PATH:
+After installation, install the `code` command in PATH (VS Code only):
 1. Open VS Code
 2. Press `Cmd+Shift+P`
 3. Type "Shell Command: Install 'code' command in PATH"
@@ -184,6 +194,7 @@ The `scripts/macos-settings.sh` script configures:
 - Size: Small (36px)
 - No magnification
 - Don't show recent applications
+- Stage Manager disabled
 
 ### Keyboard & Trackpad
 - Fast key repeat
@@ -193,6 +204,7 @@ The `scripts/macos-settings.sh` script configures:
 
 ### Other
 - Dark mode
+- Siri disabled
 - Screenshots saved to `~/Pictures/Screenshots` as PNG
 - Safari developer tools enabled
 
@@ -202,7 +214,7 @@ The `scripts/git-setup.sh` script configures:
 
 - Git user name and email
 - Default branch name (`main`)
-- Useful aliases (`st`, `co`, `br`, `ci`, `lg`, `amend`, `undo`)
+- Useful aliases (`st`, `co`, `sw`, `br`, `ci`, `rs`, `lg`, `amend`, `undo`)
 - Global gitignore
 - SSH key generation
 - GitHub CLI authentication
@@ -219,10 +231,10 @@ After running the scripts:
    plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
    ```
 
-3. **Configure NVM** - Add to `~/.zshrc`:
+3. **Configure mise and zoxide** — add to `~/.zshrc`:
    ```bash
-   export NVM_DIR="$HOME/.nvm"
-   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+   eval "$(mise activate zsh)"
+   eval "$(zoxide init zsh)"
    ```
 
 4. **Restart your Mac** for all macOS settings to take effect

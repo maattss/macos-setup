@@ -86,8 +86,10 @@ git config --global push.autoSetupRemote true
 # Useful aliases
 git config --global alias.st status
 git config --global alias.co checkout
+git config --global alias.sw switch
 git config --global alias.br branch
 git config --global alias.ci commit
+git config --global alias.rs restore
 git config --global alias.unstage 'reset HEAD --'
 git config --global alias.last 'log -1 HEAD'
 git config --global alias.lg "log --oneline --graph --decorate --all"
@@ -230,8 +232,10 @@ echo ""
 echo "Useful Git aliases added:"
 echo "  git st     - status"
 echo "  git co     - checkout"
+echo "  git sw     - switch (modern branch switching)"
 echo "  git br     - branch"
 echo "  git ci     - commit"
+echo "  git rs     - restore"
 echo "  git lg     - pretty log"
 echo "  git amend  - amend last commit"
 echo "  git undo   - undo last commit (soft)"
