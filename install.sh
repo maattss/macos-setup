@@ -121,6 +121,7 @@ brew_install() {
 brew_install git
 brew_install gh
 brew_install node
+brew_install bun
 brew_install mise
 brew_install pnpm
 brew_install jq
@@ -139,6 +140,7 @@ section "Development Applications"
 
 # Development tools
 brew_install orbstack --cask
+brew_install ghostty --cask
 brew_install warp --cask
 brew_install github --cask
 brew_install visual-studio-code --cask

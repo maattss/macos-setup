@@ -41,6 +41,7 @@ macos-setup/
 | `git` | Version control |
 | `gh` | GitHub CLI |
 | `node` | Node.js runtime |
+| `bun` | Fast JavaScript runtime & toolkit |
 | `mise` | Polyglot version manager (Node, Python, Ruby, …) |
 | `pnpm` | Fast package manager |
 | `jq` | JSON processor |
@@ -59,6 +60,7 @@ macos-setup/
 | App | Description |
 |-----|-------------|
 | OrbStack | Fast, lightweight Docker & Linux VMs |
+| Ghostty | Modern GPU-accelerated terminal |
 | Warp | Modern AI-powered terminal |
 | GitHub Desktop | Git GUI |
 | VS Code | Code editor |
