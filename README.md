@@ -66,6 +66,7 @@ macos-setup/
 | Raycast | Productivity launcher |
 | Alt-Tab | Window switcher |
 | Dropbox | Cloud storage |
+| Notion | Notes & docs |
 
 ### Media & Browsers
 | App | Description |
