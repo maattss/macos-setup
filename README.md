@@ -66,6 +66,7 @@ macos-setup/
 | Raycast | Productivity launcher |
 | Alt-Tab | Window switcher |
 | Dropbox | Cloud storage |
+| Linear | Project management |
 
 ### Media & Browsers
 | App | Description |
