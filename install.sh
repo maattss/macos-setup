@@ -146,6 +146,7 @@ brew_install slack --cask
 brew_install raycast --cask
 brew_install alt-tab --cask
 brew_install dropbox --cask
+brew_install notion --cask
 
 section "Media & Browsers"
 
