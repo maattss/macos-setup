@@ -1,0 +1,58 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(gh:*)",
+      "Bash(pnpm:*)",
+      "Bash(dotnet:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(sort:*)",
+      "Bash(diff:*)",
+      "Bash(which:*)",
+      "Bash(find:*)",
+      "Bash(echo:*)",
+      "Bash(pwd:*)",
+      "Bash(basename:*)",
+      "Bash(dirname:*)",
+      "WebSearch",
+      "WebFetch",
+      "mcp__atlassian__*",
+      "mcp__splash-ui__*"
+    ],
+    "deny": [
+      "Bash(gh repo delete:*)",
+      "Bash(npx:*)"
+    ],
+    "ask": [
+      "Bash(pnpm add:*)",
+      "Bash(pnpm -C * add:*)",
+      "Bash(pnpm --filter * add:*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm -C * install:*)",
+      "Bash(pnpm remove:*)",
+      "Bash(pnpm -C * remove:*)",
+      "Bash(dotnet add package:*)",
+      "Bash(dotnet add * package:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh pr close:*)"
+    ]
+  },
+  "enabledPlugins": {
+    "code-simplifier@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true
+  },
+  "effortLevel": "high",
+  "alwaysThinkingEnabled": true,
+  "showThinkingSummaries": true
+}

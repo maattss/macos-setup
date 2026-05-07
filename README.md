@@ -30,6 +30,12 @@ macos-setup/
 ├── scripts/
 │   ├── git-setup.sh        # Git configuration and SSH setup
 │   └── macos-settings.sh   # macOS system preferences
+├── CLAUDE.md               # Global Claude Code instructions
+├── settings.json           # Global Claude Code settings (permissions, plugins)
+├── skills/                 # Claude Code skills
+│   ├── clean-worktrees/    # /clean-worktrees — remove non-main git worktrees
+│   ├── plan-issues/        # /plan-issues — triage open GitHub issues
+│   └── review-pr/          # /review-pr — senior design review of a PR
 └── README.md
 ```
 
@@ -227,6 +233,30 @@ After running the scripts:
    ```
 
 4. **Restart your Mac** for all macOS settings to take effect
+
+## 🤖 Claude Code Setup
+
+Global config for [Claude Code](https://claude.com/claude-code) — instructions, permissions, and skills used across all projects.
+
+### What's included
+
+- **[CLAUDE.md](CLAUDE.md)** — Global instructions. Communication style (direct, no sycophancy), code standards (native APIs, no hacks, a11y), package management (pnpm only, no npx, manual approval for new deps).
+- **[settings.json](settings.json)** — Global permissions and plugins. Broad allow for `git`, `gh`, `pnpm`, `dotnet` + shell utilities. Hard deny on `npx` and `gh repo delete`. Ask-every-time for package install/add/remove and PR merge/close. Atlassian and Splash UI MCP tools auto-allowed.
+- **Skills** (under `skills/`) — copy to `~/.claude/skills/` to make them available globally:
+  - **[review-pr](skills/review-pr/SKILL.md)** — Senior engineer design review of a PR. Evaluates the approach, not the code style. Posts review as a GitHub comment, fetches Jira context if linked, refuses to review PRs with no description. `/review-pr <number>`
+  - **[plan-issues](skills/plan-issues/SKILL.md)** — Analyzes open GitHub issues and creates a prioritized implementation plan. Groups related issues, identifies quick wins and blockers, estimates scope by reading actual code. `/plan-issues [max]`
+  - **[clean-worktrees](skills/clean-worktrees/SKILL.md)** — Removes all git worktrees except the main working tree. `/clean-worktrees`
+
+### Install
+
+```bash
+# Skills
+mkdir -p ~/.claude/skills
+cp -r skills/* ~/.claude/skills/
+
+# Settings and instructions — merge manually, don't overwrite
+# Your existing ~/.claude/settings.json may have other config you want to keep
+```
 
 ## 🤝 Contributing
 
