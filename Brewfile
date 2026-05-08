@@ -2,9 +2,6 @@
 # Run `brew bundle --file=Brewfile` to install everything.
 # Run `brew bundle dump --force --file=Brewfile` to refresh from current system.
 
-# Taps
-tap "anomalyco/tap"
-
 # CLI Tools
 brew "git"
 brew "gh"
@@ -19,7 +16,6 @@ brew "mas"
 brew "azure-cli"
 brew "poetry"
 brew "supabase"
-brew "anomalyco/tap/opencode"
 
 # Development Applications
 cask "docker"

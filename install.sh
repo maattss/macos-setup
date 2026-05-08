@@ -6,26 +6,19 @@
 # Description: One-command setup for a fresh macOS installation.
 #
 # Usage:
-#   ./install.sh                  # full setup (brew + zsh + git + macOS prefs)
-#   ./install.sh --skip-git       # skip git/SSH/GitHub setup
+#   ./install.sh                  # full setup (brew + zsh + macOS prefs)
 #   ./install.sh --skip-macos     # skip macOS system preferences
-#   ./install.sh --skip-git --skip-macos
-#
-# Manual installs still required:
-# - Logi Options (Logitech website — no Homebrew cask)
 ###############################################################################
 
 set -e
 
 # Args
-SKIP_GIT=0
 SKIP_MACOS=0
 for arg in "$@"; do
     case "$arg" in
-        --skip-git) SKIP_GIT=1 ;;
         --skip-macos) SKIP_MACOS=1 ;;
         -h|--help)
-            sed -n '4,15p' "$0"
+            sed -n '4,12p' "$0"
             exit 0
             ;;
         *) echo "Unknown flag: $arg" >&2; exit 1 ;;
@@ -160,42 +153,6 @@ else
     success "NVM init already in ~/.zshrc"
 fi
 
-section "Flux Markdown (QuickLook)"
-
-# Flux Markdown is a QuickLook generator distributed only as a DMG on GitHub
-# Releases — no Homebrew cask. Download latest, mount, copy app, eject.
-if [ -d "/Applications/FluxMarkdown.app" ]; then
-    success "FluxMarkdown already installed"
-else
-    info "Downloading latest FluxMarkdown release..."
-    DMG_URL=$(curl -fsSL https://api.github.com/repos/xykong/flux-markdown/releases/latest \
-        | grep '"browser_download_url".*\.dmg"' \
-        | head -1 \
-        | sed -E 's/.*"(https:[^"]+)".*/\1/')
-
-    if [ -z "$DMG_URL" ]; then
-        warning "Could not resolve FluxMarkdown DMG URL — skipping"
-    else
-        TMP_DMG=$(mktemp -t fluxmarkdown).dmg
-        curl -fsSL "$DMG_URL" -o "$TMP_DMG"
-        MOUNT_POINT=$(hdiutil attach -nobrowse -quiet "$TMP_DMG" \
-            | grep '/Volumes/' | awk '{ $1=$2=""; print substr($0,3) }' | tail -1)
-        if [ -n "$MOUNT_POINT" ] && [ -d "$MOUNT_POINT" ]; then
-            APP_PATH=$(find "$MOUNT_POINT" -maxdepth 2 -name "FluxMarkdown.app" -print -quit)
-            if [ -n "$APP_PATH" ]; then
-                cp -R "$APP_PATH" /Applications/
-                success "FluxMarkdown installed"
-            else
-                warning "FluxMarkdown.app not found in DMG"
-            fi
-            hdiutil detach -quiet "$MOUNT_POINT" || true
-        else
-            warning "Failed to mount FluxMarkdown DMG"
-        fi
-        rm -f "$TMP_DMG"
-    fi
-fi
-
 section "Directory Setup"
 
 if [ ! -d ~/Developer ]; then
@@ -212,14 +169,6 @@ info "Running Homebrew cleanup..."
 brew cleanup
 success "Cleanup completed"
 
-# Optional sub-scripts
-if [ "$SKIP_GIT" -eq 0 ]; then
-    section "Git & SSH Setup"
-    bash "$SCRIPT_DIR/scripts/git-setup.sh"
-else
-    info "Skipping git setup (--skip-git)"
-fi
-
 if [ "$SKIP_MACOS" -eq 0 ]; then
     section "macOS System Preferences"
     bash "$SCRIPT_DIR/scripts/macos-settings.sh"
@@ -233,5 +182,4 @@ echo ""
 echo "Next steps:"
 echo "  1. Restart terminal (or run 'source ~/.zshrc')"
 echo "  2. Restart your Mac so all macOS prefs take effect"
-echo "  3. Manual install: Logi Options (https://www.logitech.com/software/logi-options-plus.html)"
 echo ""

@@ -17,17 +17,13 @@ That's it. The installer runs everything in order:
 2. Homebrew + every package in [`Brewfile`](Brewfile)
 3. Oh My Zsh + plugins, with `~/.zshrc` updated automatically
 4. NVM init lines appended to `~/.zshrc`
-5. FluxMarkdown (QuickLook generator) installed from GitHub release
-6. `~/Developer` folder
-7. Git + SSH + GitHub CLI configuration (interactive)
-8. macOS system preferences (interactive — needs sudo)
+5. `~/Developer` folder
+6. macOS system preferences (interactive — needs sudo)
 
 ### Skip optional steps
 
 ```bash
-./install.sh --skip-git       # skip git/SSH/GitHub setup
 ./install.sh --skip-macos     # skip macOS system preferences
-./install.sh --skip-git --skip-macos
 ```
 
 ## 📁 Repository Structure
@@ -37,7 +33,6 @@ macos-setup/
 ├── install.sh              # Main installer — runs everything
 ├── Brewfile                # Declarative list of brews, casks, and Mac App Store apps
 ├── scripts/
-│   ├── git-setup.sh        # Git config + SSH key + GitHub CLI auth
 │   └── macos-settings.sh   # macOS system preferences (Finder, Dock, keyboard, etc.)
 ├── CLAUDE.md               # Global Claude Code instructions
 ├── settings.json           # Global Claude Code settings (permissions, plugins)
@@ -65,7 +60,6 @@ macos-setup/
 | `azure-cli` | Azure command-line |
 | `poetry` | Python dependency management |
 | `supabase` | Supabase CLI |
-| `opencode` | Anomaly Coding CLI |
 
 ### Development Applications
 | App | Description |
@@ -100,17 +94,9 @@ macos-setup/
 - **Oh My Zsh** with `git`, `zsh-autosuggestions`, and `zsh-syntax-highlighting` enabled automatically
 - **NVM** init lines added to `~/.zshrc` automatically
 
-### Other
-- **FluxMarkdown** — Markdown Preview Enhanced for macOS QuickLook (installed from latest GitHub release DMG)
-
 ## 🔑 Mac App Store
 
 Apps installed via `mas` require you to be signed in to the App Store first. Open the App Store app, sign in, then re-run `./install.sh` — already-installed brews/casks are skipped.
-
-## 🔧 Manual Installations
-
-These can't be automated:
-- **Logi Options+** — https://www.logitech.com/software/logi-options-plus.html
 
 ## 🖥️ macOS Settings
 
@@ -120,18 +106,6 @@ These can't be automated:
 **Dock** — left side, 36px, no magnification, no recent apps, fast animations
 **Keyboard & Trackpad** — fast key repeat, tap to click, three-finger drag, no auto-correct
 **Other** — dark mode, screenshots to `~/Pictures/Screenshots` as PNG, Safari developer tools
-
-## 🔑 Git Setup
-
-`scripts/git-setup.sh` configures:
-
-- Git user name and email
-- Default branch name (`main`)
-- Useful aliases (`st`, `co`, `br`, `ci`, `lg`, `amend`, `undo`)
-- Global gitignore at `~/.gitignore_global`
-- SSH key generation (ed25519)
-- GitHub CLI authentication
-- Automatic SSH key upload to GitHub
 
 ## 🤖 Claude Code Setup
 
