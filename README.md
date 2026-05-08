@@ -1,50 +1,53 @@
 # macOS Setup 🛠
 
-Automated setup scripts for a fresh macOS installation. Get your Mac ready for development in minutes!
+Automated setup for a fresh macOS installation. One command gets you from a blank Mac to a development-ready machine.
 
 ## 🚀 Quick Start
 
 ```bash
-# Clone the repository
 git clone https://github.com/maattss/macos-setup.git
 cd macos-setup
-
-# Make scripts executable
 chmod +x install.sh scripts/*.sh
-
-# Run the main installation script
 ./install.sh
+```
 
-# Configure macOS settings (optional)
-./scripts/macos-settings.sh
+That's it. The installer runs everything in order:
 
-# Set up Git and SSH (optional)
-./scripts/git-setup.sh
+1. Xcode Command Line Tools
+2. Homebrew + every package in [`Brewfile`](Brewfile)
+3. Oh My Zsh + plugins, with `~/.zshrc` updated automatically
+4. NVM init lines appended to `~/.zshrc`
+5. FluxMarkdown (QuickLook generator) installed from GitHub release
+6. `~/Developer` folder
+7. Git + SSH + GitHub CLI configuration (interactive)
+8. macOS system preferences (interactive — needs sudo)
+
+### Skip optional steps
+
+```bash
+./install.sh --skip-git       # skip git/SSH/GitHub setup
+./install.sh --skip-macos     # skip macOS system preferences
+./install.sh --skip-git --skip-macos
 ```
 
 ## 📁 Repository Structure
 
 ```
 macos-setup/
-├── install.sh              # Main installation script (runs `brew bundle`)
-├── Brewfile                # Declarative list of brews and casks to install
+├── install.sh              # Main installer — runs everything
+├── Brewfile                # Declarative list of brews, casks, and Mac App Store apps
 ├── scripts/
-│   ├── git-setup.sh        # Git configuration and SSH setup
-│   └── macos-settings.sh   # macOS system preferences
+│   ├── git-setup.sh        # Git config + SSH key + GitHub CLI auth
+│   └── macos-settings.sh   # macOS system preferences (Finder, Dock, keyboard, etc.)
 ├── CLAUDE.md               # Global Claude Code instructions
 ├── settings.json           # Global Claude Code settings (permissions, plugins)
-├── skills/                 # Claude Code skills
-│   ├── clean-worktrees/    # /clean-worktrees — remove non-main git worktrees
-│   ├── plan-issues/        # /plan-issues — triage open GitHub issues
-│   └── review-pr/          # /review-pr — senior design review of a PR
+├── skills/                 # Claude Code skills (copy to ~/.claude/skills/)
 └── README.md
 ```
 
 ## 📦 What Gets Installed
 
 > The actual list lives in [`Brewfile`](Brewfile) — `install.sh` runs `brew bundle` against it. Add or remove apps there. Use `brew bundle dump --force --file=Brewfile` to snapshot what's currently installed.
-
-
 
 ### CLI Tools
 | Tool | Description |
@@ -58,186 +61,77 @@ macos-setup/
 | `tree` | Directory listing |
 | `wget` | File downloader |
 | `httpie` | HTTP client |
+| `mas` | Mac App Store CLI |
+| `azure-cli` | Azure command-line |
+| `poetry` | Python dependency management |
+| `supabase` | Supabase CLI |
+| `opencode` | Anomaly Coding CLI |
 
 ### Development Applications
 | App | Description |
 |-----|-------------|
 | Docker | Containerization |
 | Warp | Modern terminal |
+| iTerm2 | Terminal |
 | GitHub Desktop | Git GUI |
 | VS Code | Code editor |
-| Rider | .NET IDE |
 | .NET SDK | .NET development |
 | Bruno | API client |
+| Claude Code | AI coding assistant |
+| Codex | AI coding assistant |
 
 ### Productivity
 | App | Description |
 |-----|-------------|
 | Slack | Team communication |
-| Raycast | Productivity launcher |
-| Alt-Tab | Window switcher |
 | Dropbox | Cloud storage |
 | Notion | Notes & docs |
+| DockDoor | Window peeking from the Dock |
+| Magnet | Window manager (via Mac App Store) |
 
 ### Media & Browsers
 | App | Description |
 |-----|-------------|
-| Zen Browser | Privacy-focused browser |
+| Google Chrome | Browser |
 | Spotify | Music streaming |
 | IINA | Video player |
 
 ### Shell Enhancements
-- **Oh My Zsh** - Zsh framework
-- **zsh-autosuggestions** - Command suggestions
-- **zsh-syntax-highlighting** - Syntax highlighting
+- **Oh My Zsh** with `git`, `zsh-autosuggestions`, and `zsh-syntax-highlighting` enabled automatically
+- **NVM** init lines added to `~/.zshrc` automatically
 
-## 🔧 Manual Installations Required
+### Other
+- **FluxMarkdown** — Markdown Preview Enhanced for macOS QuickLook (installed from latest GitHub release DMG)
 
-These apps need to be installed manually:
-- **Magnet** - Window manager (Mac App Store)
-- **Logi Options** - Logitech mouse/keyboard settings
+## 🔑 Mac App Store
 
-## ⚙️ VS Code Settings
+Apps installed via `mas` require you to be signed in to the App Store first. Open the App Store app, sign in, then re-run `./install.sh` — already-installed brews/casks are skipped.
 
-After installation, install the 'code' command in PATH:
-1. Open VS Code
-2. Press `Cmd+Shift+P`
-3. Type "Shell Command: Install 'code' command in PATH"
+## 🔧 Manual Installations
 
-### Recommended settings.json
-
-```json
-{
-  "search.exclude": {
-    "**/node_modules": true
-  },
-  "editor.minimap.enabled": false,
-  "editor.formatOnSave": true,
-  "editor.inlineSuggest.enabled": true,
-  "editor.snippetSuggestions": "top",
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "source.sortImports": "explicit"
-  },
-  "files.autoSave": "onFocusChange",
-  "workbench.colorTheme": "Andromeda",
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.productIconTheme": "fluent-icons",
-  "prettier.endOfLine": "auto",
-  "eslint.enable": true,
-  "eslint.validate": ["react", "typescript", "html", "javascript"],
-  "javascript.preferences.quoteStyle": "double",
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "eslint.workingDirectories": [{ "mode": "auto" }]
-}
-```
-
-### Recommended Extensions
-
-Create `.vscode/extensions.json` in your projects:
-
-```json
-{
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-    "formulahendry.auto-rename-tag",
-    "eliverlara.andromeda",
-    "miguelsolorio.fluent-icons",
-    "pkief.material-icon-theme",
-    "yzhang.markdown-all-in-one",
-    "github.copilot",
-    "github.copilot-chat"
-  ]
-}
-```
+These can't be automated:
+- **Logi Options+** — https://www.logitech.com/software/logi-options-plus.html
 
 ## 🖥️ macOS Settings
 
-The `scripts/macos-settings.sh` script configures:
+`scripts/macos-settings.sh` configures:
 
-### Finder
-- Show all filename extensions
-- Show status bar and path bar
-- Search current folder by default
-- Use list view by default
-- New windows open to home folder
-
-### Dock
-- Position: Left
-- Size: Small (36px)
-- No magnification
-- Don't show recent applications
-
-### Keyboard & Trackpad
-- Fast key repeat
-- Tap to click enabled
-- Three finger drag enabled
-- Disable auto-correct
-
-### Other
-- Dark mode
-- Screenshots saved to `~/Pictures/Screenshots` as PNG
-- Safari developer tools enabled
+**Finder** — show extensions, status bar, path bar; search current folder; list view; open to home folder
+**Dock** — left side, 36px, no magnification, no recent apps, fast animations
+**Keyboard & Trackpad** — fast key repeat, tap to click, three-finger drag, no auto-correct
+**Other** — dark mode, screenshots to `~/Pictures/Screenshots` as PNG, Safari developer tools
 
 ## 🔑 Git Setup
 
-The `scripts/git-setup.sh` script configures:
+`scripts/git-setup.sh` configures:
 
 - Git user name and email
 - Default branch name (`main`)
 - Useful aliases (`st`, `co`, `br`, `ci`, `lg`, `amend`, `undo`)
-- Global gitignore
-- SSH key generation
+- Global gitignore at `~/.gitignore_global`
+- SSH key generation (ed25519)
 - GitHub CLI authentication
 - Automatic SSH key upload to GitHub
-
-## 📝 Post-Installation
-
-After running the scripts:
-
-1. **Restart terminal** or run `source ~/.zshrc`
-
-2. **Add Zsh plugins** to `~/.zshrc`:
-   ```bash
-   plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
-   ```
-
-3. **Configure NVM** - Add to `~/.zshrc`:
-   ```bash
-   export NVM_DIR="$HOME/.nvm"
-   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-   ```
-
-4. **Restart your Mac** for all macOS settings to take effect
 
 ## 🤖 Claude Code Setup
 
@@ -255,17 +149,16 @@ Global config for [Claude Code](https://claude.com/claude-code) — instructions
 ### Install
 
 ```bash
-# Skills
 mkdir -p ~/.claude/skills
 cp -r skills/* ~/.claude/skills/
 
-# Settings and instructions — merge manually, don't overwrite
-# Your existing ~/.claude/settings.json may have other config you want to keep
+# CLAUDE.md and settings.json — merge manually into ~/.claude/, don't overwrite
+# (your existing config may have other settings worth keeping)
 ```
 
 ## 🤝 Contributing
 
-Feel free to fork and customize for your own setup!
+Fork and customize for your own setup.
 
 ## 📄 License
 

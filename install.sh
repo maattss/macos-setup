@@ -3,23 +3,42 @@
 ###############################################################################
 # macOS Setup Script
 # Author: Mats Tyldum
-# Description: Automated setup script for a fresh macOS installation
+# Description: One-command setup for a fresh macOS installation.
 #
-# Manual installs required:
-# - Magnet (Mac App Store)
-# - Logi Options (Logitech website)
+# Usage:
+#   ./install.sh                  # full setup (brew + zsh + git + macOS prefs)
+#   ./install.sh --skip-git       # skip git/SSH/GitHub setup
+#   ./install.sh --skip-macos     # skip macOS system preferences
+#   ./install.sh --skip-git --skip-macos
+#
+# Manual installs still required:
+# - Logi Options (Logitech website — no Homebrew cask)
 ###############################################################################
 
 set -e
 
-# Colors for output
+# Args
+SKIP_GIT=0
+SKIP_MACOS=0
+for arg in "$@"; do
+    case "$arg" in
+        --skip-git) SKIP_GIT=1 ;;
+        --skip-macos) SKIP_MACOS=1 ;;
+        -h|--help)
+            sed -n '4,15p' "$0"
+            exit 0
+            ;;
+        *) echo "Unknown flag: $arg" >&2; exit 1 ;;
+    esac
+done
+
+# Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-# Logging functions
 info()    { echo -e "${BLUE}[INFO]${NC} $1"; }
 success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
 warning() { echo -e "${YELLOW}[WARNING]${NC} $1"; }
@@ -30,10 +49,8 @@ section() {
     echo ""
 }
 
-# Resolve script directory so the Brewfile path works regardless of cwd
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Check if running on macOS
 if [[ "$OSTYPE" != "darwin"* ]]; then
     error "This script is only for macOS"
     exit 1
@@ -58,7 +75,6 @@ if ! command -v brew &>/dev/null; then
     info "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-    # Add Homebrew to PATH for Apple Silicon Macs
     if [[ $(uname -m) == "arm64" ]]; then
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
         eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -72,9 +88,16 @@ fi
 
 section "Brew Packages (from Brewfile)"
 
+# `mas` requires you to be signed in to the Mac App Store. If not, the App
+# Store entries fail soft and the script continues.
+if ! mas account &>/dev/null 2>&1; then
+    warning "Not signed in to the Mac App Store — App Store apps will be skipped."
+    warning "Sign in via the App Store app, then re-run this script to install them."
+fi
+
 info "Installing packages from $SCRIPT_DIR/Brewfile..."
-brew bundle --file="$SCRIPT_DIR/Brewfile"
-success "Brew packages installed"
+brew bundle --file="$SCRIPT_DIR/Brewfile" || warning "Some packages failed — see output above"
+success "Brew packages processed"
 
 section "Oh My Zsh"
 
@@ -99,6 +122,80 @@ for plugin in zsh-autosuggestions zsh-syntax-highlighting; do
     fi
 done
 
+section "Zsh Configuration"
+
+ZSHRC="$HOME/.zshrc"
+touch "$ZSHRC"
+
+# Activate the plugins in ~/.zshrc. Replace the default `plugins=(git)` line
+# (or any existing plugins=(...) line) with the full set we want.
+DESIRED_PLUGINS="plugins=(git zsh-autosuggestions zsh-syntax-highlighting)"
+if grep -qE '^plugins=\(' "$ZSHRC"; then
+    if ! grep -qF "$DESIRED_PLUGINS" "$ZSHRC"; then
+        info "Updating zsh plugins line in ~/.zshrc..."
+        # macOS sed: -i '' for in-place without backup
+        sed -i '' -E "s|^plugins=\(.*\)|$DESIRED_PLUGINS|" "$ZSHRC"
+        success "Zsh plugins activated"
+    else
+        success "Zsh plugins already activated"
+    fi
+else
+    info "Adding zsh plugins line to ~/.zshrc..."
+    printf '\n%s\n' "$DESIRED_PLUGINS" >> "$ZSHRC"
+    success "Zsh plugins added"
+fi
+
+# NVM init block — only append if not already present.
+if ! grep -q 'NVM_DIR' "$ZSHRC"; then
+    info "Adding NVM init to ~/.zshrc..."
+    cat >> "$ZSHRC" <<'EOF'
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+EOF
+    success "NVM init added"
+else
+    success "NVM init already in ~/.zshrc"
+fi
+
+section "Flux Markdown (QuickLook)"
+
+# Flux Markdown is a QuickLook generator distributed only as a DMG on GitHub
+# Releases — no Homebrew cask. Download latest, mount, copy app, eject.
+if [ -d "/Applications/FluxMarkdown.app" ]; then
+    success "FluxMarkdown already installed"
+else
+    info "Downloading latest FluxMarkdown release..."
+    DMG_URL=$(curl -fsSL https://api.github.com/repos/xykong/flux-markdown/releases/latest \
+        | grep '"browser_download_url".*\.dmg"' \
+        | head -1 \
+        | sed -E 's/.*"(https:[^"]+)".*/\1/')
+
+    if [ -z "$DMG_URL" ]; then
+        warning "Could not resolve FluxMarkdown DMG URL — skipping"
+    else
+        TMP_DMG=$(mktemp -t fluxmarkdown).dmg
+        curl -fsSL "$DMG_URL" -o "$TMP_DMG"
+        MOUNT_POINT=$(hdiutil attach -nobrowse -quiet "$TMP_DMG" \
+            | grep '/Volumes/' | awk '{ $1=$2=""; print substr($0,3) }' | tail -1)
+        if [ -n "$MOUNT_POINT" ] && [ -d "$MOUNT_POINT" ]; then
+            APP_PATH=$(find "$MOUNT_POINT" -maxdepth 2 -name "FluxMarkdown.app" -print -quit)
+            if [ -n "$APP_PATH" ]; then
+                cp -R "$APP_PATH" /Applications/
+                success "FluxMarkdown installed"
+            else
+                warning "FluxMarkdown.app not found in DMG"
+            fi
+            hdiutil detach -quiet "$MOUNT_POINT" || true
+        else
+            warning "Failed to mount FluxMarkdown DMG"
+        fi
+        rm -f "$TMP_DMG"
+    fi
+fi
+
 section "Directory Setup"
 
 if [ ! -d ~/Developer ]; then
@@ -115,16 +212,26 @@ info "Running Homebrew cleanup..."
 brew cleanup
 success "Cleanup completed"
 
+# Optional sub-scripts
+if [ "$SKIP_GIT" -eq 0 ]; then
+    section "Git & SSH Setup"
+    bash "$SCRIPT_DIR/scripts/git-setup.sh"
+else
+    info "Skipping git setup (--skip-git)"
+fi
+
+if [ "$SKIP_MACOS" -eq 0 ]; then
+    section "macOS System Preferences"
+    bash "$SCRIPT_DIR/scripts/macos-settings.sh"
+else
+    info "Skipping macOS settings (--skip-macos)"
+fi
+
 section "Setup Complete! 🎉"
 
 echo ""
 echo "Next steps:"
-echo "  1. Run 'source ~/.zshrc' or restart your terminal"
-echo "  2. Configure Git: ./scripts/git-setup.sh"
-echo "  3. Apply macOS settings: ./scripts/macos-settings.sh"
-echo "  4. Install VS Code extensions manually or sync settings"
-echo "  5. Install manual apps: Magnet (App Store), Logi Options"
-echo ""
-echo "Add these plugins to your ~/.zshrc:"
-echo "  plugins=(git zsh-autosuggestions zsh-syntax-highlighting)"
+echo "  1. Restart terminal (or run 'source ~/.zshrc')"
+echo "  2. Restart your Mac so all macOS prefs take effect"
+echo "  3. Manual install: Logi Options (https://www.logitech.com/software/logi-options-plus.html)"
 echo ""
