@@ -26,7 +26,8 @@ chmod +x install.sh scripts/*.sh
 
 ```
 macos-setup/
-├── install.sh              # Main installation script
+├── install.sh              # Main installation script (runs `brew bundle`)
+├── Brewfile                # Declarative list of brews and casks to install
 ├── scripts/
 │   ├── git-setup.sh        # Git configuration and SSH setup
 │   └── macos-settings.sh   # macOS system preferences
@@ -40,6 +41,10 @@ macos-setup/
 ```
 
 ## 📦 What Gets Installed
+
+> The actual list lives in [`Brewfile`](Brewfile) — `install.sh` runs `brew bundle` against it. Add or remove apps there. Use `brew bundle dump --force --file=Brewfile` to snapshot what's currently installed.
+
+
 
 ### CLI Tools
 | Tool | Description |
