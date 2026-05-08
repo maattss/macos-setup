@@ -10,37 +10,28 @@
 # - Logi Options (Logitech website)
 ###############################################################################
 
-set -e  # Exit on error
+set -e
 
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
 # Logging functions
-info() {
-    echo -e "${BLUE}[INFO]${NC} $1"
-}
-
-success() {
-    echo -e "${GREEN}[SUCCESS]${NC} $1"
-}
-
-warning() {
-    echo -e "${YELLOW}[WARNING]${NC} $1"
-}
-
-error() {
-    echo -e "${RED}[ERROR]${NC} $1"
-}
-
+info()    { echo -e "${BLUE}[INFO]${NC} $1"; }
+success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
+warning() { echo -e "${YELLOW}[WARNING]${NC} $1"; }
+error()   { echo -e "${RED}[ERROR]${NC} $1"; }
 section() {
     echo ""
     echo -e "${BLUE}##########${NC} $1 ${BLUE}##########${NC}"
     echo ""
 }
+
+# Resolve script directory so the Brewfile path works regardless of cwd
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Check if running on macOS
 if [[ "$OSTYPE" != "darwin"* ]]; then
@@ -50,26 +41,23 @@ fi
 
 section "Xcode Command Line Tools"
 
-# Check for Xcode build tools, install if we don't have it
-if type xcode-select >&- && xpath=$(xcode-select --print-path) && test -d "${xpath}" && test -x "${xpath}"; then
-    success "Xcode build tools already installed"
+if command -v xcode-select &>/dev/null && xcode-select --print-path &>/dev/null; then
+    success "Xcode Command Line Tools already installed"
 else
-    info "Installing Xcode build tools..."
+    info "Installing Xcode Command Line Tools..."
     xcode-select --install
-    # Wait for installation to complete
-    until type xcode-select >&- && xpath=$(xcode-select --print-path) && test -d "${xpath}" && test -x "${xpath}"; do
+    until xcode-select --print-path &>/dev/null; do
         sleep 5
     done
-    success "Xcode build tools installed"
+    success "Xcode Command Line Tools installed"
 fi
 
 section "Homebrew"
 
-# Check for Homebrew, install if we don't have it
-if test ! "$(which brew)"; then
+if ! command -v brew &>/dev/null; then
     info "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    
+
     # Add Homebrew to PATH for Apple Silicon Macs
     if [[ $(uname -m) == "arm64" ]]; then
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
@@ -77,95 +65,19 @@ if test ! "$(which brew)"; then
     fi
     success "Homebrew installed"
 else
-    success "Homebrew already installed"
+    info "Updating Homebrew..."
+    brew update
+    success "Homebrew up to date"
 fi
 
-# Update Homebrew
-info "Updating Homebrew..."
-brew update
-success "Homebrew updated"
+section "Brew Packages (from Brewfile)"
 
-section "CLI Tools"
-
-# Improved brew install function with better error handling
-brew_install() {
-    local package=$1
-    local is_cask=$2
-    
-    if [[ "$is_cask" == "--cask" ]]; then
-        if brew list --cask "$package" &>/dev/null; then
-            success "$package (cask) already installed"
-        else
-            info "Installing $package (cask)..."
-            if brew install --cask "$package"; then
-                success "$package installed"
-            else
-                warning "Failed to install $package"
-            fi
-        fi
-    else
-        if brew list "$package" &>/dev/null; then
-            success "$package already installed"
-        else
-            info "Installing $package..."
-            if brew install "$package"; then
-                success "$package installed"
-            else
-                warning "Failed to install $package"
-            fi
-        fi
-    fi
-}
-
-# CLI Tools
-brew_install git
-brew_install gh
-brew_install node
-brew_install nvm
-brew_install pnpm
-brew_install jq
-brew_install tree
-brew_install wget
-brew_install httpie
-
-section "Development Applications"
-
-# Development tools
-brew_install docker --cask
-brew_install warp --cask
-brew_install github --cask
-brew_install visual-studio-code --cask
-brew_install rider --cask
-brew_install dotnet-sdk --cask
-brew_install bruno --cask
-
-section "Productivity Applications"
-
-# Productivity
-brew_install slack --cask
-brew_install raycast --cask
-brew_install alt-tab --cask
-brew_install dropbox --cask
-brew_install notion --cask
-
-section "Media & Browsers"
-
-# Media & Browsers
-brew_install zen-browser --cask
-brew_install spotify --cask
-brew_install iina --cask
-
-section "Utilities"
-
-# Utilities
-brew_install font-smoothing-adjuster --cask
-
-# Uncomment to install VPN
-# brew_install windscribe --cask
+info "Installing packages from $SCRIPT_DIR/Brewfile..."
+brew bundle --file="$SCRIPT_DIR/Brewfile"
+success "Brew packages installed"
 
 section "Oh My Zsh"
 
-# Check for Oh My Zsh, install if we don't have it
 if [ -d ~/.oh-my-zsh ]; then
     success "Oh My Zsh already installed"
 else
@@ -174,28 +86,21 @@ else
     success "Oh My Zsh installed"
 fi
 
-# Install useful Zsh plugins
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    info "Installing zsh-autosuggestions..."
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-    success "zsh-autosuggestions installed"
-else
-    success "zsh-autosuggestions already installed"
-fi
-
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    info "Installing zsh-syntax-highlighting..."
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-    success "zsh-syntax-highlighting installed"
-else
-    success "zsh-syntax-highlighting already installed"
-fi
+for plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+    plugin_dir="$ZSH_CUSTOM/plugins/$plugin"
+    if [ ! -d "$plugin_dir" ]; then
+        info "Installing $plugin..."
+        git clone "https://github.com/zsh-users/$plugin" "$plugin_dir"
+        success "$plugin installed"
+    else
+        success "$plugin already installed"
+    fi
+done
 
 section "Directory Setup"
 
-# Create Developer folder if it doesn't exist
 if [ ! -d ~/Developer ]; then
     info "Creating 'Developer' folder..."
     mkdir ~/Developer
