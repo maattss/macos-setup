@@ -81,15 +81,12 @@ fi
 
 section "Brew Packages (from Brewfile)"
 
-# `mas` requires you to be signed in to the Mac App Store. If not, the App
-# Store entries fail soft and the script continues.
-if ! mas account &>/dev/null 2>&1; then
-    warning "Not signed in to the Mac App Store — App Store apps will be skipped."
-    warning "Sign in via the App Store app, then re-run this script to install them."
-fi
-
 info "Installing packages from $SCRIPT_DIR/Brewfile..."
-brew bundle --file="$SCRIPT_DIR/Brewfile" || warning "Some packages failed — see output above"
+if ! brew bundle --file="$SCRIPT_DIR/Brewfile"; then
+    warning "One or more Brewfile entries failed."
+    warning "Common cause: not signed in to the Mac App Store (Magnet)."
+    warning "Sign in via the App Store app and re-run ./install.sh — already-installed apps are skipped."
+fi
 success "Brew packages processed"
 
 section "Oh My Zsh"
@@ -120,21 +117,33 @@ section "Zsh Configuration"
 ZSHRC="$HOME/.zshrc"
 touch "$ZSHRC"
 
-# Activate the plugins in ~/.zshrc. Replace the default `plugins=(git)` line
-# (or any existing plugins=(...) line) with the full set we want.
-DESIRED_PLUGINS="plugins=(git zsh-autosuggestions zsh-syntax-highlighting)"
-if grep -qE '^plugins=\(' "$ZSHRC"; then
-    if ! grep -qF "$DESIRED_PLUGINS" "$ZSHRC"; then
-        info "Updating zsh plugins line in ~/.zshrc..."
-        # macOS sed: -i '' for in-place without backup
-        sed -i '' -E "s|^plugins=\(.*\)|$DESIRED_PLUGINS|" "$ZSHRC"
-        success "Zsh plugins activated"
+# Ensure the desired plugins are in ~/.zshrc without clobbering anything the
+# user has added. Parse the existing plugins list and append each missing one.
+ensure_plugin() {
+    local plugin="$1"
+    local line content existing
+    line=$(grep -E '^plugins=\(' "$ZSHRC" | head -1)
+    content="${line#plugins=(}"
+    content="${content%)*}"
+    for existing in $content; do
+        [[ "$existing" == "$plugin" ]] && return
+    done
+    if [[ -z "${content// }" ]]; then
+        sed -i '' -E "s|^plugins=\([[:space:]]*\)|plugins=(${plugin})|" "$ZSHRC"
     else
-        success "Zsh plugins already activated"
+        sed -i '' -E "s|^(plugins=\([^)]*)\)|\1 ${plugin})|" "$ZSHRC"
     fi
+    info "Added '$plugin' to ~/.zshrc plugins"
+}
+
+if grep -qE '^plugins=\(' "$ZSHRC"; then
+    for p in git zsh-autosuggestions zsh-syntax-highlighting; do
+        ensure_plugin "$p"
+    done
+    success "Zsh plugins activated"
 else
     info "Adding zsh plugins line to ~/.zshrc..."
-    printf '\n%s\n' "$DESIRED_PLUGINS" >> "$ZSHRC"
+    printf '\n%s\n' "plugins=(git zsh-autosuggestions zsh-syntax-highlighting)" >> "$ZSHRC"
     success "Zsh plugins added"
 fi
 
