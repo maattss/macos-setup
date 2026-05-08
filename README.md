@@ -57,7 +57,6 @@ macos-setup/
 | `wget` | File downloader |
 | `httpie` | HTTP client |
 | `mas` | Mac App Store CLI |
-| `azure-cli` | Azure command-line |
 | `poetry` | Python dependency management |
 | `supabase` | Supabase CLI |
 
@@ -65,8 +64,7 @@ macos-setup/
 | App | Description |
 |-----|-------------|
 | Docker | Containerization |
-| Warp | Modern terminal |
-| iTerm2 | Terminal |
+| Ghostty | Terminal emulator |
 | GitHub Desktop | Git GUI |
 | VS Code | Code editor |
 | .NET SDK | .NET development |
