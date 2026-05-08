@@ -12,30 +12,33 @@ brew "jq"
 brew "tree"
 brew "wget"
 brew "httpie"
+brew "mas"
+brew "poetry"
+brew "supabase"
 
 # Development Applications
 cask "docker"
-cask "warp"
+cask "ghostty"
 cask "github"
 cask "visual-studio-code"
-cask "rider"
 cask "dotnet-sdk"
 cask "bruno"
+cask "claude-code"
+cask "codex"
 
 # Productivity Applications
 cask "slack"
-cask "raycast"
-cask "alt-tab"
 cask "dropbox"
 cask "notion"
+cask "dockdoor"
+
+# Mac App Store
+mas "Magnet", id: 441258766
 
 # Media & Browsers
-cask "zen-browser"
+cask "google-chrome"
 cask "spotify"
 cask "iina"
-
-# Utilities
-cask "font-smoothing-adjuster"
 
 # VPN (uncomment to install)
 # cask "windscribe"
